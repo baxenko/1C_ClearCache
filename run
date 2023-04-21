@@ -1,0 +1,38 @@
+@echo off
+chcp 1251 >nul
+color 3
+echo Завершую 1С у всiх користувачiв... 
+taskkill /IM 1cv8c.exe /F /T
+echo Всi вiдкритi 1C спiшно завершенi :-)
+echo Починаю видаляти кеш 1С...
+timeout /t 3 /nobreak >nul
+setlocal enabledelayedexpansion
+set AllUsersProfile=%SystemDrive%\Users
+
+for /D %%A in ("%AllUsersProfile%\*") do (
+    if not "%%~nxA"=="Public" (
+        echo Cleaning 1Cv8 folders for user: %%~nxA
+        
+        set "RoamingFolderToDelete=%%A\AppData\Roaming\1C\1Cv8"
+        if exist "!RoamingFolderToDelete!" (
+            echo Cleaning !RoamingFolderToDelete!...
+            del /F /S /Q "!RoamingFolderToDelete!\*"
+            rmdir /S /Q "!RoamingFolderToDelete!"
+        ) else (
+            echo Folder not found: !RoamingFolderToDelete!
+        )
+        
+        set "LocalFolderToDelete=%%A\AppData\Local\1C\1Cv8"
+        if exist "!LocalFolderToDelete!" (
+            echo Cleaning !LocalFolderToDelete!...
+            del /F /S /Q "!LocalFolderToDelete!\*"
+            rmdir /S /Q "!LocalFolderToDelete!"
+        ) else (
+            echo Folder not found: !LocalFolderToDelete!
+        )
+    )
+)
+echo Кеш успiшно видален. Гарного дня :-)
+pause
+
+
