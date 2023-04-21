@@ -1,13 +1,13 @@
 # 1C_ClearCache
 
-# [en] This bat file deletes 1C cache files for all users
+# This bat file deletes 1C cache files for all users
 
 His actions:
 
 1. Kill task **1cv8c.exe** for all users
 2. Deleted all files\folders on **%AppData%\Roaming\1C\1Cv8** and **%AppData%\Local\1C\1Cv8** for all users
 
-# [ua] Цей bat-файл видаляє кеш 1С у всіх користувачів
+# Цей bat-файл видаляє кеш 1С у всіх користувачів
 
 Його кроки:
 
